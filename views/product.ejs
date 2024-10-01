@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Minimalist Product Page</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #fafafa;
+        color: #333;
+        line-height: 1.6;
+        font-weight: 400;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; 
+    }
+    #container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 60px 20px;
+    }
+    .product-image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+    }
+    .product-image img:hover {
+        transform: scale(1.02);
+    }
+    .gallery-thumbnail {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        cursor: pointer;
+        border: 2px solid transparent;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+    }
+    .gallery-thumbnail:hover, .gallery-thumbnail.active {
+        border-color: #333;
+    }
+    .product-title {
+        font-size: 32px;
+        font-weight: 300;
+        margin-bottom: 15px;
+        letter-spacing: -0.5px;
+    }
+    .price {
+        font-size: 24px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 20px;
+    }
+    .btn {
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 12px 24px;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .btn-primary {
+        background-color: #333;
+        border-color: #333;
+    }
+    .btn-primary:hover {
+        background-color: #555;
+        border-color: #555;
+    }
+    .btn-outline-secondary {
+        color: #333;
+        border-color: #333;
+    }
+    .btn-outline-secondary:hover {
+        background-color: #333;
+        color: #fff;
+    }
+    .size-button {
+        border: 1px solid #ddd;
+        background-color: #fff;
+        color: #333;
+        padding: 8px 16px;
+        margin-right: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-radius: 4px;
+        font-weight: 500;
+    }
+    .size-button.selected {
+        background-color: #333;
+        color: #fff;
+        border-color: #333;
+    }
+    .form-control {
+        border-radius: 4px;
+        border-color: #ddd;
+        padding: 12px;
+        font-weight: 400;
+    }
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #333;
+    }
+    .review-stars {
+        color: #ffd700;
+    }
+    .section-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+    .product-details {
+        margin-top: 40px;
+    }
+    .social-icons a {
+        color: #333;
+        font-size: 18px;
+        margin-right: 15px;
+        transition: color 0.2s ease;
+    }
+    .social-icons a:hover {
+        color: #555;
+    }
+    #reviewForm {
+        margin-top: 20px;
+    }
+    .card {
+        border: none;
+        background-color: #f8f8f8;
+        border-radius: 8px;
+    }
+    .card-body {
+        font-weight: 400;
+    }
+    .text-muted {
+        font-weight: 300;
+    }
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .dropdown-toggle {
+        background-color: #f8f8f8;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        font-size: 18px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+    
+    .dropdown-toggle:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    .dropdown-toggle:focus {
+        outline: none;
+    }
+    
+    .dropdown-menu {
+        position: absolute;
+        right: 0;
+        min-width: 120px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        z-index: 1;
+        display: none;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-top: 10px;
+    }
+    
+    .dropdown-menu a {
+        color: #333;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        transition: background-color 0.2s ease;
+    }
+    
+    .dropdown-menu a:hover {
+        background-color: #f8f8f8;
+    }
+    
+    .show {
+        display: block;
+    }
+    
+    
+</style>
+</head>
+<body style="margin-top: 40px;">
+
+
+<%-include('partials/navbar') %>
+
+
+
+<div id="container">
+    <div class="row">
+        <!-- Image Gallery -->
+        <div class="col-md-6 mb-4">
+            <div class="product-image mb-3">
+                <img id="mainImage" src="<%= product.image %>" alt="Product Image" class="img-fluid">
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="d-flex">
+                    <img src="<%= product.image %>" alt="Thumbnail 1" class="gallery-thumbnail me-2 active">
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-toggle" type="button" id="dropdownMenuButton"   aria-label="More options"></button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a href="/products/<%= product._id %>/edit" class="dropdown-item">Update</a></li>
+                        <li>
+                            <a href="#" class="dropdown-item" onclick="event.preventDefault(); this.nextElementSibling.submit();">Delete</a>
+                            <form action="/products/<%= product._id %>?_method=delete" method="POST" style="display: none;">
+                                <input type="hidden" name="_method" value="DELETE">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        <!-- Product Details Section -->
+    <div class="col-md-6">
+        <h1 class="product-title"><%= product.title %></h1>
+        <div class="d-flex align-items-center mb-3">
+            <div class="review-stars me-2">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+            </div>
+            <span>(4.5, 128 reviews)</span>
+        </div>
+        <div class="price">$<%= product.price %></div>
+
+            <!-- Size Selection -->
+            <div class="mb-4">
+                <p class="section-title">Size</p>
+                <div class="d-flex flex-wrap">
+                    <div class="size-button mb-2">XS</div>
+                    <div class="size-button mb-2">S</div>
+                    <div class="size-button mb-2">M</div>
+                    <div class="size-button mb-2">L</div>
+                    <div class="size-button mb-2">XL</div>
+                </div>
+            </div>
+
+            <!-- Add to Cart and Wishlist -->
+            <div class="mb-4">
+                <div class="d-flex align-items-center mb-3">
+                    <label for="quantity" class="me-3">Quantity</label>
+                    <input type="number" id="quantity" value="1" min="1" max="10" class="form-control" style="width: 80px;">
+                </div>
+                <button class="btn btn-primary me-2 mb-2" id="addToCartBtn">Add to Cart</button>
+                <button class="btn btn-outline-secondary mb-2">
+                    <i class="bi bi-heart"></i> Wishlist
+                </button>
+            </div>
+
+            <!-- Product Description -->
+            <div class="product-details">
+                <p class="section-title">Product Details</p>
+                <p><%= product.description %></p>
+            </div>
+
+            <!-- Delivery Details -->
+            <div class="mt-4">
+                <p class="section-title">Delivery</p>
+                <div class="input-group mb-3">
+                    <input type="number" placeholder="Enter Pincode" class="form-control" id="pincodeInput">
+                    <button class="btn btn-outline-secondary" type="button" id="checkPincodeBtn">Check</button>
+                </div>
+                <div id="deliveryMessage" class="mt-2"></div>
+            </div>
+
+            <!-- Share -->
+            <div class="mt-4">
+                <p class="section-title">Share</p>
+                <div class="social-icons">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-twitter"></i></a>
+                    <a href="#"><i class="bi bi-pinterest"></i></a>
+                    <a href="#"><i class="bi bi-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Review -->
+    <div class="container" style="margin-top: 200px; ">
+        <div class="row">
+            <div class="col">
+            <h2 class="h3 mb-4">Customer Reviews</h2>
+            
+            <button class="btn btn-outline-secondary mb-4" id="writeReviewBtn">Write a Review</button>
+            
+            <form id="reviewForm" action="/products/<%= product._id %>/review" method="POST" class="card mb-4 shadow-sm" style="display: none;">
+                <div class="card-body">
+                <div class="mb-3">
+                    <textarea name="comment" class="form-control" rows="3" placeholder="Share your thoughts about this product"></textarea>
+                </div>
+                <div class="mb-3">
+                    <select name="rating" class="form-select">
+                    <option value="" disabled selected>Select your rating</option>
+                    <option value="5">★★★★★</option>
+                    <option value="4">★★★★☆</option>
+                    <option value="3">★★★☆☆</option>
+                    <option value="2">★★☆☆☆</option>
+                    <option value="1">★☆☆☆☆</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+                </div>
+            </form>
+        
+            <div id="reviewsList">
+                <% if (product.reviews.length === 0) { %>
+                <p class="text-muted">No reviews yet. Be the first to share your thoughts!</p>
+                <% } else { %>
+                <% for(let review of product.reviews){ %>
+                    <div class="card mb-3 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="text-warning">
+                            <% for (let i = 0; i < 5; i++) { %>
+                            <i style="color: #333;" class="bi <%= i < review.rating ? 'bi-star-fill' : 'bi-star' %>"></i>
+                            <% } %>
+                        </div>
+                        <small class="text-muted"><%= review.createdAt.toDateString() %></small>
+                        </div>
+                        <p class="card-text mb-0"><%= review.comment %></p>
+
+                    </div>
+                    <div style="display: flex; flex-direction: row; gap: 20px;">
+                        <a style="margin-left: 20px; margin-bottom: 5px;" href="">Edit</a>
+                        <form method="post" action="/products/<%= product._id %>/review/<%= review._id %>?_method=delete" style="display: inline;">
+                            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">Delete</a>
+                        </form>
+                    </div>
+                    
+                    </div>
+                <% } %>
+                <% } %>
+            </div>
+            </div>
+        </div>
+        </div>
+
+
+</div>  
+    
+    <!-- <Footer>         -->
+
+<footer class="footer" style="background-color: #f8f9fa; padding: 60px 0 30px; color: #333; font-family: 'Inter', sans-serif; box-shadow: 0 4px 51px rgba(0, 0, 0, 0.1);">
+                <div class="container">
+                    <div class="row mb-5">
+                        <!-- Newsletter Subscription -->
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <h5 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem;">Stay Updated</h5>
+                            <div class="d-flex flex-column flex-md-row">
+                                <input type="email" class="form-control mb-2 mb-md-0" style="border: 1px solid #ddd; padding: 10px; max-width: 250px;" placeholder="Enter your email">
+                                <button class="btn ms-md-2" style="background-color: #333; border: none; color: white; padding: 10px 20px; font-weight: 500; transition: background-color 0.3s ease;">Subscribe</button>
+                            </div>
+                        </div>
+            
+                        <!-- Social Icons -->
+                        <div class="col-md-6 text-md-end">
+                            <h5 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem;">Connect with Us</h5>
+                            <div>
+                                <a href="#" style="color: #333; margin: 0 12px 0 0; font-size: 20px; transition: color 0.3s ease;"><i class="bi bi-facebook"></i></a>
+                                <a href="#" style="color: #333; margin: 0 12px 0 0; font-size: 20px; transition: color 0.3s ease;"><i class="bi bi-twitter"></i></a>
+                                <a href="#" style="color: #333; margin: 0 12px 0 0; font-size: 20px; transition: color 0.3s ease;"><i class="bi bi-instagram"></i></a>
+                                <a href="#" style="color: #333; margin: 0 12px 0 0; font-size: 20px; transition: color 0.3s ease;"><i class="bi bi-youtube"></i></a>
+                                <a href="#" style="color: #333; margin: 0; font-size: 20px; transition: color 0.3s ease;"><i class="bi bi-twitch"></i></a>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="row mb-4">
+                        <!-- Support Column -->
+                        <div class="col-6 col-md-3 mb-4">
+                            <h5 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 1rem;">Support</h5>
+                            <ul style="list-style: none; padding-left: 0; font-size: 0.875rem;">
+                                <li style="margin-bottom: 0.5rem;"><a href="#" style="color: #666; text-decoration: none; transition: color 0.3s ease;">Contact Us</a></li>
+                                <li style="margin-bottom: 0.5rem;"><a href="#" style="color: #666; text-decoration: none; transition: color 0.3s ease;">FAQs</a></li>
+                                <li style="margin-bottom: 0.5rem;"><a href="#" style="color: #666; text-decoration: none; transition: color 0.3s ease;">Size Guide</a></li>
+                                <li><a href="#" style="color: #666; text-decoration: none; transition: color 0.3s ease;">Shipping & Returns</a></li>
+                            </ul>
+                        </div>
+            
+                        <!-- Shop Column -->
+                        <div class="col-6 col-md-3 mb-4">
+                            <h5 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 1rem;">Shop</h5>
+                            <ul style="list-style: none; padding-left: 0; font-size: 0.875rem;">
+                                <li style="margin-bottom: 0.5rem;"><a href="#" style="color: #666; text-decoration: none; transition: color 0.3s ease;">Men's Shopping</a></li>
+                                <li style="margin-bottom: 0.5rem;"><a href="#" style="color: #666; text-decoration: none; transition: color 0.3s ease;">Women's Shopping</a></li>
+                                <li style="margin-bottom: 0.5rem;"><a href="#" style="color: #666; text-decoration: none; transition: color 0.3s ease;">Kids' Shopping</a></li>
+                                <li><a href="#" style="color: #666; text-decoration: none; transition: color 0.3s ease;">Discounts</a></li>
+                            </ul>
+                        </div>
+            
+                        <!-- Company Column -->
+                        <div class="col-6 col-md-3 mb-4">
+                            <h5 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 1rem;">Company</h5>
+                            <ul style="list-style: none; padding-left: 0; font-size: 0.875rem;">
+                                <li style="margin-bottom: 0.5rem;"><a href="#" style="color: #666; text-decoration: none; transition: color 0.3s ease;">Our Story</a></li>
+                                <li style="margin-bottom: 0.5rem;"><a href="#" style="color: #666; text-decoration: none; transition: color 0.3s ease;">Careers</a></li>
+                                <li style="margin-bottom: 0.5rem;"><a href="#" style="color: #666; text-decoration: none; transition: color 0.3s ease;">Terms & Conditions</a></li>
+                                <li><a href="#" style="color: #666; text-decoration: none; transition: color 0.3s ease;">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+            
+                        <!-- Contact Column -->
+                        <div class="col-6 col-md-3 mb-4">
+                            <h5 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 1rem;">Contact</h5>
+                            <ul style="list-style: none; padding-left: 0; font-size: 0.875rem;">
+                                <li style="margin-bottom: 0.5rem; color: #666;">1-202-555-0105</li>
+                                <li style="margin-bottom: 0.5rem; color: #666;">1-202-555-0106</li>
+                                <li><a href="mailto:help@shopper.com" style="color: #666; text-decoration: none; transition: color 0.3s ease;">help@shopper.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+            
+                    <!-- Footer Bottom -->
+                    <div style="border-top: 1px solid #ddd; padding-top: 20px; text-align: center; font-size: 0.875rem;">
+                        <p style="margin-bottom: 1rem; color: #666;">&copy; 2024 All rights reserved. Designed by Your Name.</p>
+                        <div>
+                            <img src="https://static-00.iconduck.com/assets.00/payment-visa-icon-2048x1261-bxxvrf9b.png" alt="Visa" style="max-width: 40px; margin: 0 8px; opacity: 0.6;">
+                            <img src="https://www.fintechfutures.com/files/2019/01/Mastercard-logo-2019.jpg" alt="Mastercard" style="max-width: 40px; margin: 0 8px; opacity: 0.6;">
+                            <img src="https://static-00.iconduck.com/assets.00/amex-icon-2048x1286-jssggdy1.png" alt="Amex" style="max-width: 40px; margin: 0 8px; opacity: 0.6;">
+                            <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" alt="PayPal" style="max-width: 40px; margin: 0 8px; opacity: 0.6;">
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.size-button').click(function() {
+            $('.size-button').removeClass('selected');
+            $(this).addClass('selected');
+        });
+
+        $('.gallery-thumbnail').click(function() {
+            $('#mainImage').attr('src', $(this).attr('src'));
+            $('.gallery-thumbnail').removeClass('active');
+            $(this).addClass('active');
+        });
+
+        $('#addToCartBtn').click(function() {
+            var originalText = $(this).text();
+            $(this).text('Added to Cart').addClass('btn-success').removeClass('btn-primary');
+            setTimeout(() => {
+                $(this).text(originalText).removeClass('btn-success').addClass('btn-primary');
+            }, 2000);
+        });
+
+        $('#checkPincodeBtn').click(function() {
+            var pincode = $('#pincodeInput').val();
+            if (pincode) {
+                $('#deliveryMessage').text('Delivery available. Estimated delivery in 3-5 days.').addClass('text-success');
+            } else {
+                $('#deliveryMessage').text('Please enter a valid pincode.').addClass('text-danger');
+            }
+        });
+
+        $('#writeReviewBtn').click(function() {
+            $('#reviewForm').slideToggle();
+        });
+
+                    // Dropdown functionality
+        $('.dropdown-toggle').click(function(e) {
+            e.stopPropagation();
+            $(this).siblings('.dropdown-menu').toggleClass('show');
+        });
+
+        $(document).click(function() {
+            $('.dropdown-menu').removeClass('show');
+        });
+
+        $('.dropdown-menu').click(function(e) {
+            e.stopPropagation();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
