@@ -1,7 +1,8 @@
 const express = require('express');
 const productModel = require("../models/Product.model");
 const reviewModel = require("../models/Review.models");
-const { productValidation } = require('../../middlewares/validator');
+const { productValidation } = require('../middlewares/validator');
+const { isLoggedIn, isSeller } = require('../middlewares/authentication');
 const router = express.Router();  // Create a new router instance
 
 // Define routes
@@ -26,13 +27,15 @@ router.get('/products', async(req,res)=>{
     })
 });
 
-router.get('/products/new', (req,res)=>{
+router.get('/products/new',isLoggedIn, isSeller, (req,res)=>{
     res.render("new-product");
 });
 
-router.post('/products', productValidation , async(req,res)=>{
+router.post('/products',isLoggedIn,isSeller, productValidation , async(req,res)=>{
     const body = req.body;
     await productModel.create(body);
+
+    req.flash("success", "Product Added Sucessfully !!!")
     res.redirect('/products');
 });
 
@@ -42,13 +45,13 @@ router.get('/products/:id', async(req,res)=>{
     res.render("product", {product})
 });
 
-router.get('/products/:id/edit',async (req,res)=>{
+router.get('/products/:id/edit',isLoggedIn,isSeller,async (req,res)=>{
     const {id} = req.params;
     const product = await productModel.findById(id);
     res.render("editing", {product})
 });
 
-router.put("/products/:id", productValidation, async(req,res)=>{
+router.put("/products/:id",isLoggedIn,isSeller, productValidation, async(req,res)=>{
     const {id} = req.params;
     const body = req.body;
     
@@ -60,12 +63,13 @@ router.put("/products/:id", productValidation, async(req,res)=>{
     if (body.description) product.description = body.description;
 
     await product.save();
+    req.flash("success", "Product Updated Sucessfully !!!")
     res.redirect("/products")
 
 });
 
 
-router.delete("/products/:id", async (req,res)=>{
+router.delete("/products/:id", isLoggedIn,isSeller,async (req,res)=>{
     const {id} = req.params;
     const product = await productModel.findById(id);
 
@@ -74,6 +78,7 @@ router.delete("/products/:id", async (req,res)=>{
     }
     await productModel.findByIdAndDelete(id);
 
+    req.flash("success", "Product is deleted sucessfully !!")
     res.redirect("/products")
 });
 

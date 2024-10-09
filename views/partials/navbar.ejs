@@ -1,18 +1,39 @@
 
-<nav class="navbar fixed-top navbar-expand-lg" style="background-color: #333333; padding: 1rem 1.5rem; border-bottom: 1px solid #eaeaea; box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/" style="font-size: 1.2rem; font-weight: 600; color: #fff;">Shopper</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style="border: none;">
-      <span class="navbar-toggler-icon" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3E%3Cpath stroke=%27rgba%280, 0, 0, 0.5%29%27 stroke-width=%272%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3E%3C/svg%3E');"></span>
+
+
+ <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #343a40; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);">
+  <div class="container">
+    <a class="navbar-brand" href="/" style="font-size: 1.5rem; font-weight: 700; color: #ffffff;">Shopper's Stop</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-      <div class="navbar-nav text-uppercase">
-        <a class="nav-link" href="/" style="font-size: 1rem; font-weight: 500; letter-spacing: 0.5px; color: #fff; padding: 0.5rem 1rem; transition: color 0.2s ease;">Home</a>
-        <a class="nav-link" href="/products" style="font-size: 1rem; font-weight: 500; letter-spacing: 0.5px; color: #fff; padding: 0.5rem 1rem; transition: color 0.2s ease;">Products</a>
-        <a class="nav-link" href="/products/new" style="font-size: 1rem; font-weight: 500; letter-spacing: 0.5px; color: #fff; padding: 0.5rem 1rem; transition: color 0.2s ease;">Add Products</a>
-        <a class="nav-link disabled" style="font-size: 1rem; font-weight: 500; letter-spacing: 0.5px; color: #6c757d; opacity: 0.6; padding: 0.5rem 1rem; pointer-events: none;">Premium</a>
-      </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/" style="font-weight: 500; color: #ffffff; padding: 0.7rem 1rem; transition: color 0.3s ease;">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/products" style="font-weight: 500; color: #ffffff; padding: 0.7rem 1rem; transition: color 0.3s ease;">All Products</a>
+        </li>
+       <% if(user && user.role == "seller") {%>
+        <li class="nav-item">
+          <a class="nav-link" href="/products/new" style="font-weight: 500; color: #ffffff; padding: 0.7rem 1rem; transition: color 0.3s ease;">Add Products</a>
+        </li>
+        <% } %>
+        <li class="nav-item">
+          <a class="nav-link" href="#" style="font-weight: 500; color: #ffffff; padding: 0.7rem 1rem; transition: color 0.3s ease;">Contact</a>
+        </li>
+        <% if(!user){ %>
+         <a href="/login"> <button class="btn btn-light" style="border-radius: 8px; padding: 0.5rem 1.2rem; font-weight: 500; margin-left: 1rem; transition: background-color 0.3s ease;">Sign Up</button></a>
+        <% }else{ %>
+          <li  class="nav-item">
+            <a class="nav-link" href="#" style="font-weight: 600; color: #ffffff; padding: 0.7rem 1rem; transition: color 0.3s ease;">Welcome <%= user.username %></a>
+          </li>
+          <li class="nav-item">
+           <a href="/logout"> <button class="btn btn-light" style="border-radius: 8px; padding: 0.5rem 1.2rem; font-weight: 500; margin-left: 1rem; transition: background-color 0.3s ease;"> Logout</button></a>
+          </li>
+          <% } %>
+      </ul>
     </div>
   </div>
 </nav>
-

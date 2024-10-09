@@ -1,0 +1,27 @@
+
+<% if (success && success.length) { %>
+    <div class="w-50 mx-auto alert alert-success alert-dismissible fade show" role="alert" style=" box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); border-radius: 8px; animation: fadeInSlide 0.5s ease; padding: 20px; position: relative;">
+      <strong style="font-weight: 600;">Success:</strong> <%= success %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="position: absolute; top: 10px; right: 10px;"></button>
+    </div>
+<% } %>
+
+<% if (error && error.length) { %>
+    <div class="w-50 mx-auto alert alert-danger alert-dismissible fade show" role="alert" style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); border-radius: 8px; animation: fadeInSlide 0.5s ease; padding: 20px; position: relative;">
+      <strong style="font-weight: 600;">Error:</strong> <%= error %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="position: absolute; top: 5px; right: 10px;"></button>
+    </div>
+<% } %>
+
+<style>
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
