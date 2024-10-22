@@ -12,145 +12,146 @@ async function seedDb() {
   try {
     const products = [
       {
-        "title": "Trench Coat",
-        "image": "https://i.pinimg.com/564x/4b/2c/1c/4b2c1ced5f0f3fbf010a477aa45f758b.jpg",
-        "price": 15000,
-        "description": "Classic trench coat with a timeless design and high-quality material."
+        "title": "Men's Classic Oxford Shirt",
+        "image": "https://i.pinimg.com/736x/f7/bb/e5/f7bbe545e4f532e655741fce3f1125ba.jpg",
+        "price": 4999,
+        "description": "A timeless white Oxford shirt for men. Perfect for both casual and formal occasions.",
+        "category": "men"
       },
       {
-        "title": "Floral Dress",
-        "image": "https://i.pinimg.com/564x/19/a1/c1/19a1c1e2c531688eca669e6e28e4541f.jpg",
-        "price": 7000,
-        "description": "Elegant floral dress with a flattering fit, perfect for special occasions."
+        "title": "Women's Floral Maxi Dress",
+        "image": "https://i.pinimg.com/564x/ef/b3/60/efb3600f42d03ab45646c56a48c9960f.jpg",
+        "price": 7999,
+        "description": "Elegant floral print maxi dress with a flowy silhouette. Ideal for summer events.",
+        "category": "women"
       },
       {
-        "title": "Jogging Pants",
-        "image": "https://i.pinimg.com/736x/30/65/6f/30656fe8d13fcdc224239e2e6170afcc.jpg",
-        "price": 3500,
-        "description": "Comfortable jogging pants made from breathable fabric for active wear."
+        "title": "Men's Slim Fit Chinos",
+        "image": "https://i.pinimg.com/564x/6f/a7/81/6fa781f41b50db82352df348d14f85c2.jpg",
+        "price": 5999,
+        "description": "Comfortable and stylish slim fit chinos in khaki. Versatile for work or weekend wear.",
+        "category": "men"
       },
       {
-        "title": "Cardigan",
-        "image": "https://i.pinimg.com/564x/6f/2b/62/6f2b62ac74185f869511dd0c05d07c64.jpg",
-        "price": 5000,
-        "description": "Cozy cardigan ideal for layering in cooler weather."
+        "title": "Women's Tailored Blazer",
+        "image": "https://i.pinimg.com/enabled/564x/7b/35/af/7b35af8bc0710b1b6047556ce786f54f.jpg",
+        "price": 8999,
+        "description": "Sharp, fitted blazer in classic black. A must-have for any professional wardrobe.",
+        "category": "women"
       },
       {
-        "title": "Leather Jacket",
-        "image": "https://i.pinimg.com/564x/06/69/69/066969841c40b90be7608704267eecf0.jpg",
-        "price": 20000,
-        "description": "Stylish leather jacket with a sleek design and premium quality."
+        "title": "Men's Denim Jacket",
+        "image": "https://i.pinimg.com/736x/e0/2c/63/e02c634d7d5c87c99e4542b7e2215c42.jpg",
+        "price": 6999,
+        "description": "Rugged denim jacket in a versatile blue wash. Perfect for layering in any season.",
+        "category": "men"
       },
       {
-        "title": "Denim Jeans",
-        "image": "https://i.pinimg.com/564x/a5/57/4d/a5574dac94d1ac0587d60f6b7bf4d5e2.jpg",
-        "price": 8000,
-        "description": "Classic denim jeans with a comfortable fit and versatile style."
+        "title": "Women's High-Waisted Jeans",
+        "image": "https://i.pinimg.com/enabled/564x/72/41/37/724137fad12d488d48535bd03800d103.jpg",
+        "price": 6499,
+        "description": "Flattering high-waisted jeans with a slim fit. Made from comfortable stretch denim.",
+        "category": "women"
       },
       {
-        "title": "Blazer",
-        "image": "https://i.pinimg.com/564x/90/31/b0/9031b0b3cbc594cc4076424392ef44c7.jpg",
-        "price": 12000,
-        "description": "Sharp blazer perfect for professional and formal occasions."
+        "title": "Men's Polo Shirt",
+        "image": "https://i.pinimg.com/enabled/564x/54/bb/62/54bb623f158c4216711885e9db8132b8.jpg",
+        "price": 3999,
+        "description": "Classic polo shirt in navy blue. Made from breathable cotton piqué fabric.",
+        "category": "men"
       },
       {
-        "title": "Sweater",
-        "image": "https://i.pinimg.com/564x/7a/f6/4d/7af64d49d55417fd6d51c9b61b64f755.jpg",
-        "price": 6000,
-        "description": "Soft and warm sweater ideal for colder weather."
+        "title": "Women's Wrap Blouse",
+        "image": "https://i.pinimg.com/enabled/564x/62/f0/93/62f093fbb4d164bfd77a5881acd184aa.jpg",
+        "price": 4499,
+        "description": "Elegant wrap blouse in a soft, flowy fabric. Features a v-neckline and tie waist.",
+        "category": "women"
       },
       {
-        "title": "Skirt",
-        "image": "https://i.pinimg.com/736x/3b/23/84/3b23843aaef2a07a28c1d9bdbae1f98b.jpg",
-        "price": 5500,
-        "description": "Trendy skirt with a modern design suitable for various occasions."
+        "title": "Men's Leather Biker Jacket",
+        "image": "https://i.pinimg.com/enabled/564x/bd/8b/f6/bd8bf6814dea2d72e411b0a1b2e3b75b.jpg",
+        "price": 19999,
+        "description": "Edgy leather biker jacket with silver hardware. Made from premium quality leather.",
+        "category": "men"
       },
       {
-        "title": "Sweater",
-        "image": "https://i.pinimg.com/564x/fc/4d/8c/fc4d8c5e6451053c62a8ebca2fa578ce.jpg",
-        "price": 5500,
-        "description": "Trendy sweater with a modern design suitable for various occasions."
+        "title": "Women's Pencil Skirt",
+        "image": "https://i.pinimg.com/564x/3b/22/34/3b2234e78de4264be5f01e9f6a582b17.jpg",
+        "price": 5499,
+        "description": "Sleek pencil skirt in classic black. Perfect for office wear or formal occasions.",
+        "category": "women"
       },
       {
-        "title": "Hoddie",
-        "image": "https://i.pinimg.com/736x/ba/2a/66/ba2a66a26fa4a4f5bfe458cb1e03ef8d.jpg",
-        "price": 5500,
-        "description": "Trendy hoddie with a modern design suitable for various occasions."
+        "title": "Men's Cashmere Sweater",
+        "image": "https://i.pinimg.com/564x/d8/9b/80/d89b80eb16a8c9c90c556e1480f8924e.jpg",
+        "price": 12999,
+        "description": "Luxurious cashmere sweater in a rich burgundy color. Soft, warm, and incredibly comfortable.",
+        "category": "men"
       },
       {
-        "title": "T-shirt",
-        "image": "https://i.pinimg.com/564x/5c/a6/18/5ca618f6a990749f19f2fecc0b515799.jpg",
-        "price": 2500,
-        "description": "Comfortable and casual t-shirt for everyday wear. made up of very flexible material,"
+        "title": "Women's Leather Tote Bag",
+        "image": "https://i.pinimg.com/564x/6d/b2/a2/6db2a2cbe89efdcb9b19eb6a893f30de.jpg",
+        "price": 14999,
+        "description": "Spacious leather tote bag in tan. Features multiple compartments for organization.",
+        "category": "women"
       },
       {
-        "title": "Chinos",
-        "image": "https://i.pinimg.com/564x/94/e5/1e/94e51efae48fdee9b54de3d72cb90e9f.jpg",
-        "price": 7000,
-        "description": "Stylish chinos that offer a smart casual look. Versatile enough for both work and play."
+        "title": "Men's Tailored Suit",
+        "image": "https://i.pinimg.com/enabled/564x/e2/a7/78/e2a7785a8d4ae24f4061727dea0584f1.jpg",
+        "price": 29999,
+        "description": "Sharp, modern suit in charcoal gray. Includes jacket and trousers.",
+        "category": "men"
       },
       {
-        "title": "Puffer Jacket",
-        "image": "https://i.pinimg.com/564x/b7/4e/0c/b74e0cdb47dc6e993eef95d3b501a43b.jpg",
-        "price": 18000,
-        "description": "Warm puffer jacket ideal for winter wear. Keeps you cozy without sacrificing style."
+        "title": "Women's Silk Camisole",
+        "image": "https://i.imgur.com/YQBD9pU.jpg",
+        "price": 3999,
+        "description": "Luxurious silk camisole in a soft blush color. Perfect for layering or wearing alone.",
+        "category": "women"
       },
       {
-        "title": "Linen Shirt",
-        "image": "https://i.pinimg.com/564x/d9/34/63/d93463445cf24621eb3c812f35b73e58.jpg",
-        "price": 6000,
-        "description": "Breathable linen shirt perfect for hot weather. A must-have for a relaxed, stylish look."
+        "title": "Men's Cargo Shorts",
+        "image": "https://i.pinimg.com/564x/fd/94/8b/fd948b1fc983506543ffc598b6c02598.jpg",
+        "price": 4499,
+        "description": "Durable cargo shorts with multiple pockets. Ideal for casual summer wear.",
+        "category": "men"
       },
       {
-        "title": "Cargo Shorts",
-        "image": "https://i.pinimg.com/564x/ed/ea/99/edea9973c1c1e2e95cc89b07d092ef77.jpg",
-        "price": 4000,
-        "description": "Durable cargo shorts featuring multiple pockets. Ideal for adventures and casual outings."
+        "title": "Women's Knit Cardigan",
+        "image": "https://i.pinimg.com/enabled/564x/34/3b/44/343b44f90da4ef1c1df57f6d117378e5.jpg",
+        "price": 5999,
+        "description": "Cozy knit cardigan in a soft gray color. Perfect for layering in cooler weather.",
+        "category": "women"
       },
       {
-        "title": "Wrap Dress",
-        "image": "https://i.pinimg.com/564x/0b/32/f2/0b32f2b67f69bb88575da5f5aab3f650.jpg",
-        "price": 8500,
-        "description": "Flattering wrap dress suitable for all body types. Perfect for both casual and formal occasions."
+        "title": "Men's Printed T-Shirt",
+        "image": "https://i.pinimg.com/enabled/564x/cb/1b/c7/cb1bc7bc945c0607196ea7959bfe07f4.jpg",
+        "price": 2999,
+        "description": "Cool graphic print t-shirt in white. Made from soft, breathable cotton.",
+        "category": "men"
       },
       {
-        "title": "Tracksuit",
-        "image": "https://i.pinimg.com/564x/52/b7/08/52b7080bdf9c4bcb3880d7435f3e7930.jpg",
-        "price": 9500,
-        "description": "Comfortable tracksuit for workouts and lounging. A great choice for stylish athletic wear."
+        "title": "Women's Pleated Midi Skirt",
+        "image": "https://i.pinimg.com/564x/dd/59/70/dd5970910eab4b49db2d4925be9ff3d3.jpg",
+        "price": 6499,
+        "description": "Elegant pleated midi skirt in a vibrant red color. Features an elastic waistband for comfort.",
+        "category": "women"
       },
       {
-        "title": "Maxi Skirt",
-        "image": "https://i.pinimg.com/564x/76/92/03/7692038c8beec5045e304b6cf032cb9a.jpg",
-        "price": 6000,
-        "description": "Flowy maxi skirt that’s perfect for summer outings. Offers a relaxed fit and elegant style."
+        "title": "Men's Hooded Sweatshirt",
+        "image": "https://i.pinimg.com/enabled/564x/95/00/84/950084ac4dc0f1949ec90b1cdbe91398.jpg",
+        "price": 5499,
+        "description": "Comfortable hooded sweatshirt in heather gray. Perfect for casual wear or workouts.",
+        "category": "men"
       },
       {
-        "title": "Peacoat",
-        "image": "https://i.pinimg.com/564x/c1/16/a0/c116a0ee2cfa2aa88ab55a44d2a2a4e6.jpg",
-        "price": 22000,
-        "description": "Classic peacoat that adds a timeless touch to your winter wardrobe. Stylish and warm for cold days."
-      },
-      {
-        "title": "Graphic T-shirt",
-        "image": "https://i.pinimg.com/564x/57/6e/68/576e68a2b3c8b888bcde2f1e6d49f6f4.jpg",
-        "price": 3000,
-        "description": "Casual graphic t-shirt for everyday wear. Express your style effortlessly with this piece."
-      },
-      {
-        "title": "Belted Trench",
-        "image": "https://i.pinimg.com/564x/a8/56/3b/a8563b3886b4cf5a43c9e7a50d5e2449.jpg",
-        "price": 16000,
-        "description": "Belted trench coat that exudes sophistication. Ideal for layering over any outfit."
-      },
-      {
-        "title": "Combat Boots",
-        "image": "https://i.pinimg.com/564x/a5/73/bb/a573bb005f75e182cb9c77b6dcf597f0.jpg",
-        "price": 9000,
-        "description": "Sturdy combat boots designed for rugged adventures. A versatile addition to any footwear collection."
+        "title": "Women's Strappy Sandals",
+        "image": "https://i.pinimg.com/564x/b0/ba/64/b0ba649b9e90200181e9e60b1bc23905.jpg",
+        "price": 7999,
+        "description": "Elegant strappy sandals with a low heel. Versatile for both casual and dressy occasions.",
+        "category": "women"
       }
     ];
-
     await productModel.deleteMany({});
     await productModel.create(products);
 

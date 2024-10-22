@@ -1,4 +1,4 @@
-const { required, ref } = require('joi');
+const { required, ref, types } = require('joi');
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 
@@ -22,7 +22,7 @@ const userSchema = mongoose.Schema({
     cart : [
         {
             product : {
-                type : mongoose.Types.ObjectId,
+                type : mongoose.Schema.Types.ObjectId,
                 ref : "Product"
 
             },
@@ -31,6 +31,12 @@ const userSchema = mongoose.Schema({
                 min : 1,
                 default : 1
             }
+        }
+    ],
+    wishList: [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref  : 'product'
         }
     ]
 })

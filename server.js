@@ -20,9 +20,14 @@ const mongoUrl = process.env.MONGOOSE_URL;
 
 // Initialize express app
 const app = express(); 
-//  express session
+// express session
 app.use(session({             
-  secret : "Keybord cat"        // session
+  secret : "Keybord cat" ,
+  saveUninitialized: false,       // session
+  cookie: {
+    secure: false, 
+    maxAge: 1000 * 60 * 60 
+  }
 }))
 
 // passport setup
@@ -45,7 +50,8 @@ app.use(flash());
 app.use((req,res,next) =>{
   app.locals.success = req.flash("success");
   app.locals.error = req.flash("error");
-  app.locals.user = req.user;
+  app.locals.user =req.user;
+
 
   next();
 })
@@ -66,10 +72,18 @@ app.use(reviewRoutes);
 const authRoutes = require('./routes/auth.routes.js')
 app.use(authRoutes)
 
+const cartRoutes = require('./routes/cart.routes.js')
+app.use(cartRoutes)
 
+const wishListRoutes = require('./routes/api/wishList.routes.js')
+app.use(wishListRoutes)
 
+const paymentRoutes = require('./routes/api/payment.routes.js')
+app.use(paymentRoutes)
 
-
+app.get("*", (req,res)=>{
+  res.render("404");
+})
 
 
 // Connect to MongoDB and start the server

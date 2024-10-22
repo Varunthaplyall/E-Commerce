@@ -2,10 +2,11 @@ const express = require('express');
 const reviewModel = require('../models/Review.models');
 const productModel = require('../models/Product.model');
 const { reviewValidation } = require('../middlewares/validator');
+const { isLoggedIn } = require('../middlewares/authentication');
 const router = express.Router()
 
 
-router.post("/products/:productId/review", reviewValidation, async (req,res)=>{
+router.post("/products/:productId/review",isLoggedIn, reviewValidation, async (req,res)=>{
     const {productId} = req.params;
     const {rating, comment} = req.body;
     console.log({productId});
@@ -21,7 +22,9 @@ router.post("/products/:productId/review", reviewValidation, async (req,res)=>{
     res.redirect(`/products/${productId}`);
 })
 
-router.delete("/products/:productId/review/:reviewId", async (req,res)=>{
+// router.put()
+
+router.delete("/products/:productId/review/:reviewId",isLoggedIn,async (req,res)=>{
     const {productId} = req.params;
     const {reviewId} = req.params;
     const review = await reviewModel.findByIdAndDelete(reviewId);   

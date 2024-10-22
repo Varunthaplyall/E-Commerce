@@ -18,7 +18,10 @@ const reviewValidation = (req,res,next)=>{
     const {error, value} = reviewSchema.validate(body);
 
     if(error){
+        req.flash("error", error.details[0].message)
         console.log(`Error occured while giving reviews ${error}`);
+        res.redirect("back")
+        return
     }else{
         next();
     }

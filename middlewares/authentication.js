@@ -1,7 +1,7 @@
 const isLoggedIn = (req,res,next)=>{
     if(!req.isAuthenticated()){
         req.flash("error", "please login first")
-        res.redirect("/login")
+       return res.redirect("/login")
     }
     next();
 }

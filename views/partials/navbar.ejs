@@ -21,16 +21,16 @@
         </li>
         <% } %>
         <li class="nav-item">
-          <a class="nav-link" href="#" style="font-weight: 500; color: #ffffff; padding: 0.7rem 1rem; transition: color 0.3s ease;">Contact</a>
+          <a class="nav-link" href="/cart" style="font-weight: 500; color: #ffffff; padding: 0.7rem 1rem; transition: color 0.3s ease;">Cart</a>
         </li>
         <% if(!user){ %>
-         <a href="/login"> <button class="btn btn-light" style="border-radius: 8px; padding: 0.5rem 1.2rem; font-weight: 500; margin-left: 1rem; transition: background-color 0.3s ease;">Sign Up</button></a>
+         <a href="/login"> <button class="btn btn-light" style="border-radius: 8px; padding: 0.7rem 1.2rem; font-weight: 500; margin-left: 1rem; transition: background-color 0.3s ease;">Sign Up</button></a>
         <% }else{ %>
           <li  class="nav-item">
             <a class="nav-link" href="#" style="font-weight: 600; color: #ffffff; padding: 0.7rem 1rem; transition: color 0.3s ease;">Welcome <%= user.username %></a>
           </li>
           <li class="nav-item">
-           <a href="/logout"> <button class="btn btn-light" style="border-radius: 8px; padding: 0.5rem 1.2rem; font-weight: 500; margin-left: 1rem; transition: background-color 0.3s ease;"> Logout</button></a>
+           <a href="/logout"> <button class="btn btn-light" style="border-radius: 8px; padding: 0.7rem 1.2rem; font-weight: 500; margin-left: 1rem; transition: background-color 0.3s ease;"> Logout</button></a>
           </li>
           <% } %>
       </ul>
