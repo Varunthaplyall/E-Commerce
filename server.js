@@ -10,6 +10,7 @@ const flash = require("connect-flash"); // used for flash messages
 const passport = require('passport');
 const Strategy = require('passport-local');
 const userModel = require('./models/user.model.js');
+const MongoStore = require('connect-mongo');
 
 // Load environment variables
 dotenv.config();
@@ -23,7 +24,12 @@ const app = express();
 // express session
 app.use(session({             
   secret : "Keybord cat" ,
-  saveUninitialized: false,       // session
+  resave : false,
+  saveUninitialized: false,      // session
+  store : MongoStore.create({
+    mongoUrl : mongoUrl,
+    ttl : 7 * 24 * 60 * 60 * 1000,
+  }),
   cookie: {
     secure: false, 
     maxAge: 1000 * 60 * 60 
