@@ -6,7 +6,7 @@ const path = require('path');
 const ejsMate = require("ejs-mate");  
 const methodOverride = require("method-override");
 const session = require('express-session');
-const flash = require("connect-flash"); // used for flash messages
+const flash = require("connect-flash"); 
 const passport = require('passport');
 const Strategy = require('passport-local');
 const userModel = require('./models/user.model.js');
@@ -87,16 +87,22 @@ app.use(wishListRoutes)
 const paymentRoutes = require('./routes/api/payment.routes.js')
 app.use(paymentRoutes)
 
+
+
+
 app.get("*", (req,res)=>{
   res.render("404");
 })
+
+
+
 
 
 // Connect to MongoDB and start the server
 mongoose.connect(mongoUrl)
   .then(() => {
     console.log("Connected to the database successfully!");
-    app.listen(port,'0.0.0.0', () => {
+    app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
     });
   })
