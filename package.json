@@ -25,5 +25,8 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0",
     "razorpay": "^2.9.4"
-  }
+  },
+  "engines": {
+  "node": "18.19.1"
+}
 }
