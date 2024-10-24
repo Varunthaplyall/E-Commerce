@@ -14,9 +14,10 @@ document.addEventListener('click', (e)=>{
 async function addOrRemoveFromWishList(productId, button ) {
     try {
         
-        const res = await axios.post(`http://localhost:3000/wishList/${productId}`, {}, {
+        const res = await axios.post(`https://e-commerce-mj6h.onrender.com/wishList/${productId}`, {}, {
             headers: {'X-Requested-With': 'XMLHttpRequest'}
         })
+        console.log(res.data)
 
         if(res.data.success){
             if(button.classList.contains('fa-solid')){
