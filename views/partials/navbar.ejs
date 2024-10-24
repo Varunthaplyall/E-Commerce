@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
       <!-- Logo -->
       <a class="navbar-brand" href="/">
@@ -7,60 +7,57 @@
       </a>
 
       <!-- Mobile Toggle -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
       </button>
 
       <!-- Main Navigation -->
       <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav mx-auto">
+          <ul class="navbar-nav ms-auto align-items-center">
               <li class="nav-item">
                   <a class="nav-link active" href="/">
-                      <i class="fas fa-home nav-icon"></i>
-                      <span>Home</span>
+                      <i class="fas fa-home me-1"></i>
+                      Home
                   </a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="/products">
-                      <i class="fas fa-store nav-icon"></i>
-                      <span>All Products</span>
+                      <i class="fas fa-store me-1"></i>
+                      All Products
                   </a>
               </li>
               <% if(user && user.role == "seller") { %>
               <li class="nav-item">
                   <a class="nav-link" href="/products/new">
-                      <i class="fas fa-plus-circle nav-icon"></i>
-                      <span>Add Products</span>
+                      <i class="fas fa-plus-circle me-1"></i>
+                      Add Products
                   </a>
               </li>
               <% } %>
               <li class="nav-item">
-                  <a class="nav-link cart-link" href="/cart">
-                      <i class="fas fa-shopping-cart nav-icon"></i>
-                      <span>Cart</span>
-                     
+                  <a class="nav-link" href="/cart">
+                      <i class="fas fa-shopping-cart me-1"></i>
+                      Cart
                   </a>
               </li>
-          </ul>
-
-          <!-- User Actions -->
-          <div class="nav-actions">
               <% if(!user) { %>
-                  <a href="/login" class="btn btn-login">
-                      <i class="fas fa-sign-in-alt me-2"></i>
-                      Sign In
-                  </a>
+                  <li class="nav-item ms-2">
+                      <a href="/login" class="btn btn-sign-in">
+                          <i class="fas fa-sign-in-alt me-2"></i>
+                          Sign In
+                      </a>
+                  </li>
               <% } else { %>
-                  <div class="dropdown">
-                      <button class="btn btn-user dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle user-menu" href="#" role="button" data-bs-toggle="dropdown">
                           <div class="user-avatar">
                               <%= user.username.charAt(0).toUpperCase() %>
                           </div>
                           <span class="ms-2"><%= user.username %></span>
-                      </button>
-                      <ul class="dropdown-menu dropdown-menu-end">
-                         
-                          <li><hr class="dropdown-divider"></li>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                          
+                          <li><hr class="dropdown-divider bg-gray-600"></li>
                           <li>
                               <a class="dropdown-item text-danger" href="/logout">
                                   <i class="fas fa-sign-out-alt me-2"></i>
@@ -68,212 +65,142 @@
                               </a>
                           </li>
                       </ul>
-                  </div>
+                  </li>
               <% } %>
-          </div>
+          </ul>
       </div>
   </div>
 </nav>
 
 <style>
-/* Navbar Styles */
+/* Navbar Base */
 .navbar {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(17, 24, 39, 0.95);
   backdrop-filter: blur(10px);
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   padding: 1rem 0;
-  transition: all 0.3s ease;
-}
-
-.navbar.scrolled {
-  padding: 0.7rem 0;
-  background-color: rgba(255, 255, 255, 0.98);
 }
 
 /* Brand/Logo */
 .navbar-brand {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #2563eb;
-  transition: transform 0.3s ease;
+  color: #ffffff;
+  letter-spacing: 0.5px;
 }
 
 .navbar-brand:hover {
-  transform: translateY(-2px);
-  color: #1e40af;
+  color: #60a5fa;
+}
+
+.navbar-brand i {
+  color: #60a5fa;
 }
 
 /* Navigation Links */
 .nav-link {
   font-weight: 500;
-  color: #1f2937;
-  padding: 0.5rem 1rem;
+  color: #e5e7eb !important;
+  padding: 0.7rem 1rem !important;
   margin: 0 0.2rem;
   border-radius: 0.5rem;
   transition: all 0.3s ease;
-  position: relative;
 }
 
 .nav-link:hover {
-  color: #2563eb;
-  background-color: #f1f5f9;
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .nav-link.active {
-  color: #2563eb;
-  background-color: #eff6ff;
+  color: #60a5fa !important;
+  background-color: rgba(96, 165, 250, 0.1);
 }
 
-.nav-icon {
-  margin-right: 0.5rem;
-  font-size: 0.9rem;
-}
-
-/* Cart Badge */
-.cart-link {
-  position: relative;
-}
-
-.cart-badge {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #ef4444;
-  color: white;
-  font-size: 0.7rem;
-  padding: 0.2rem 0.5rem;
-  border-radius: 1rem;
-  transform: translate(50%, -50%);
-}
-
-/* User Actions */
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-/* Login Button */
-.btn-login {
-  background-color: #2563eb;
-  color: white;
-  padding: 0.6rem 1.5rem;
+/* Sign In Button */
+.btn-sign-in {
+  background-color: #60a5fa;
+  color: #ffffff;
+  padding: 0.7rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: 500;
+  border: none;
   transition: all 0.3s ease;
 }
 
-.btn-login:hover {
-  background-color: #1e40af;
-  color: white;
+.btn-sign-in:hover {
+  background-color: #3b82f6;
+  color: #ffffff;
   transform: translateY(-2px);
 }
 
-/* User Dropdown */
-.btn-user {
+/* User Menu */
+.user-menu {
   display: flex;
   align-items: center;
-  background-color: #f1f5f9;
-  border: none;
   padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  color: #1f2937;
   font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.btn-user:hover {
-  background-color: #e2e8f0;
 }
 
 .user-avatar {
   width: 2rem;
   height: 2rem;
-  background-color: #2563eb;
-  color: white;
+  background-color: #3b82f6;
+  color: #ffffff;
   border-radius: 50%;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
 }
 
-/* Dropdown Menu */
+/* Dropdown Styles */
 .dropdown-menu {
-  border: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #1f2937;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   border-radius: 0.5rem;
   margin-top: 0.5rem;
   min-width: 200px;
 }
 
 .dropdown-item {
+  color: #e5e7eb;
   padding: 0.7rem 1rem;
-  color: #1f2937;
   transition: all 0.2s ease;
 }
 
 .dropdown-item:hover {
-  background-color: #f1f5f9;
-  color: #2563eb;
+  background-color: rgba(96, 165, 250, 0.1);
+  color: #60a5fa;
+}
+
+.dropdown-item.text-danger {
+  color: #ef4444 !important;
 }
 
 .dropdown-item.text-danger:hover {
-  background-color: #fef2f2;
-  color: #dc2626;
+  background-color: rgba(239, 68, 68, 0.1);
 }
 
 /* Mobile Responsive */
 @media (max-width: 991.98px) {
   .navbar-collapse {
-      background-color: white;
+      background-color: #1f2937;
       padding: 1rem;
       border-radius: 0.5rem;
       margin-top: 1rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   }
 
   .nav-link {
-      padding: 0.7rem 1rem;
+      padding: 0.8rem 1rem !important;
       margin: 0.2rem 0;
   }
 
-  .nav-actions {
-      margin-top: 1rem;
-      justify-content: center;
+  .user-menu {
+      justify-content: flex-start;
+      width: 100%;
   }
 }
 </style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Navbar scroll effect
-  const navbar = document.querySelector('.navbar');
-  window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-          navbar.classList.add('scrolled');
-      } else {
-          navbar.classList.remove('scrolled');
-      }
-  });
-
-
-  // Active link highlighting
-  const currentLocation = window.location.pathname;
-  document.querySelectorAll('.nav-link').forEach(link => {
-      if (link.getAttribute('href') === currentLocation) {
-          link.classList.add('active');
-      }
-  });
-
-  // Mobile menu smooth collapse
-  const navbarToggler = document.querySelector('.navbar-toggler');
-  const navbarCollapse = document.querySelector('.navbar-collapse');
-  
-  if (navbarToggler && navbarCollapse) {
-      navbarToggler.addEventListener('click', () => {
-          navbarCollapse.style.transition = 'all 0.3s ease';
-      });
-  }
-});
-</script>

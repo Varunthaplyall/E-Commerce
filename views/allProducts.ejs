@@ -109,35 +109,6 @@
             color: var(--primary-color);
         }
 
-        .filters {
-            background: white;
-            padding: 1rem;
-            border-radius: 1rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .filter-btn {
-            border: 1px solid #e2e8f0;
-            background: white;
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            margin: 0.25rem;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
-        .search-box {
-            border-radius: 2rem;
-            padding: 0.5rem 1.5rem;
-            border: 1px solid #e2e8f0;
-        }
-
         .skeleton {
             animation: skeleton-loading 1s linear infinite alternate;
         }
@@ -170,26 +141,6 @@
     <main class="container mt-5 pt-5">
         <h1 class="text-center page-title mb-5">Discover Our Products</h1>
         
-        <!-- Filters Section -->
-        <div class="filters">
-            <div class="row align-items-center">
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <input type="text" class="form-control search-box" placeholder="Search products..." id="searchInput">
-                </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <select class="form-select search-box" id="sortSelect">
-                        <option value="default">Sort by</option>
-                        <option value="price-asc">Price: Low to High</option>
-                        <option value="price-desc">Price: High to Low</option>
-                        <option value="name-asc">Name: A to Z</option>
-                        <option value="name-desc">Name: Z to A</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                   
-                </div>
-            </div>
-        </div>
 
         <!-- Products Grid -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="productsGrid">
@@ -245,7 +196,7 @@
     <%- include('partials/footer') %>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <script src="/js/wishList.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Elements
@@ -255,86 +206,6 @@
             const categoryFilters = document.getElementById('categoryFilters');
             const products = document.querySelectorAll('.product-card');
 
-            // Filter and sort products
-            function updateProducts() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const sortValue = sortSelect.value;
-                const activeCategory = categoryFilters.querySelector('.active').dataset.category;
-
-                // Convert products NodeList to Array for sorting
-                let productsArray = Array.from(products);
-
-                // Filter products
-                productsArray = productsArray.filter(product => {
-                    const matchesSearch = product.dataset.name.includes(searchTerm);
-                    const matchesCategory = activeCategory === 'all' || product.dataset.category === activeCategory;
-                    return matchesSearch && matchesCategory;
-                });
-
-                // Sort products
-                productsArray.sort((a, b) => {
-                    switch(sortValue) {
-                        case 'price-asc':
-                            return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
-                        case 'price-desc':
-                            return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
-                        case 'name-asc':
-                            return a.dataset.name.localeCompare(b.dataset.name);
-                        case 'name-desc':
-                            return b.dataset.name.localeCompare(a.dataset.name);
-                        default:
-                            return 0;
-                    }
-                });
-
-                // Clear grid and append sorted/filtered products
-                productsGrid.innerHTML = '';
-                productsArray.forEach(product => {
-                    product.classList.add('card-enter');
-                    productsGrid.appendChild(product);
-                    
-                    // Trigger reflow
-                    void product.offsetWidth;
-                    
-                    // Add active class for animation
-                    product.classList.add('card-enter-active');
-                });
-            }
-
-            // Event listeners
-            searchInput.addEventListener('input', updateProducts);
-            sortSelect.addEventListener('change', updateProducts);
-            
-            categoryFilters.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    categoryFilters.querySelector('.active').classList.remove('active');
-                    e.target.classList.add('active');
-                    updateProducts();
-                });
-            });
-
-            // Wishlist functionality
-            document.querySelectorAll('.like-btn').forEach(btn => {
-                btn.addEventListener('click', async function() {
-                    const productId = this.getAttribute('productId');
-                    try {
-                        const response = await axios.post(`/products/${productId}/toggleWishlist`);
-                        if (response.data.success) {
-                            this.classList.toggle('fa-regular');
-                            this.classList.toggle('fa-solid');
-                            
-                            // Add heart animation
-                            this.style.transform = 'scale(1.3)';
-                            setTimeout(() => {
-                                this.style.transform = 'scale(1)';
-                            }, 200);
-                        }
-                    } catch (error) {
-                        console.error('Error toggling wishlist:', error);
-                    }
-                });
-            });
-
             // Show loading skeleton
             function showLoading() {
                 const template = document.getElementById('skeletonTemplate');
@@ -343,9 +214,6 @@
                     productsGrid.appendChild(template.content.cloneNode(true));
                 }
             }
-
-            // Initialize
-            updateProducts();
         });
     </script>
 </body>
