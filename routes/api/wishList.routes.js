@@ -16,7 +16,7 @@ router.post('/wishList/:productId', isLoggedIn,async (req, res) => {
         console.log(userId)            // userId is not getting null or undefined 
         const productIndex = user.wishList.findIndex(p => p == productId);
         // console.log(productIndex)
-        // console.log(typeof(productId))
+         // console.log(typeof(productId))
 
         let message;
         if (productIndex == -1) {
